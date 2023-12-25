@@ -1,7 +1,7 @@
 import FeatureCard from "@/components/FeatureCard";
 import Header from "@/components/Header";
-import { MdVideoCall } from "react-icons/md";
-
+import { MdFacebook, MdVideoCall } from "react-icons/md";
+import { RiFacebookBoxFill } from "react-icons/ri";
 export default function Home() {
   return (
     <>
@@ -11,7 +11,7 @@ export default function Home() {
         <h1 className="font-bold text-responsive text-3xl md:text-4xl lg:text-[46px] transition-all duration-300">
           Omegle Video Call
         </h1>
-        <p className=" py-5 md:py-10 text-[16px] sm:text-lg ">
+        <p className="py-5 md:py-10 text-[16px] sm:text-lg ">
           Omegle is a Great Spot to meet people online. Where a stranger can
           initiate Video Conversation with another stranger at random over the
           internet using webcam. Download Omegle App for mobile, Start chatting
@@ -28,19 +28,19 @@ export default function Home() {
 
       <div className="featureCard__Responsive gap-5 px-[3%] sm:px-[9%] py-5 ">
         <FeatureCard
-          imagePath="/2.png"
+          imagePath="/talkWithStrangers.png"
           altTxt="Talk To Strangers"
           heading="Talk to Strangers "
           text="The internet is full of amazing people, Omegle lets you chat with them."
         />
         <FeatureCard
-          imagePath="/1.png"
+          imagePath="/videoCallImg.png"
           altTxt="Live Video Chat"
           heading="Live Video Chat"
           text="Texting and webcamming are two ways in omegle to connect with stranger"
         />
         <FeatureCard
-          imagePath="/3.png"
+          imagePath="/interactWithGirls.png"
           altTxt="Interact with Girls"
           heading="Interact with Girls"
           text="Using college email address Omegle lets you meet other college students."
@@ -51,7 +51,9 @@ export default function Home() {
 
       {/* Omegle Video Call info section Starts */}
       <div className="px-[3%] sm:px-[9%]">
-        <h1 className="font-bold text-4xl py-5">Omegle Video Call</h1>
+        <h1 className="font-bold text-3xl sm:text-4xl py-5">
+          Omegle Video Call
+        </h1>
         <p className="py-5 text-lg">
           Omegle is a Great Spot to meet people online. Where a stranger can
           initiate Video Conversation with another stranger at random over the
@@ -74,6 +76,29 @@ export default function Home() {
         </p>
       </div>
       {/* Omegle Video Call info section Ends */}
+
+      {/* Footer Section starts */}
+
+      <div className="px-[3%] sm:px-[9%] py-10 ">
+        <div className="bg-white p-5 rounded-3xl">
+          <div className=" py-2 flex justify-between">
+            <div className="flex items-end">
+              <img src="/Logo.png" alt="LOGO" className="w-44 " />
+              <p className="font-bold ps-20 -rotate-12">Talk to strangers!</p>
+            </div>
+            <div>
+              <button className="flex items-center bg-[#3b5998] text-white uppercase font-bold text-xs p-1 gap-2 rounded">
+                <RiFacebookBoxFill className="text-lg text-[#3b5998] bg-white " />
+                Share
+              </button>
+            </div>
+          </div>
+
+          <div className="bg-[#fff7ee] p-5"></div>
+        </div>
+      </div>
+
+      {/* Footer Section ends  */}
     </>
   );
 }

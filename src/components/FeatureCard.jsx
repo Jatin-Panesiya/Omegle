@@ -11,7 +11,7 @@ const FeatureCard = ({ imagePath, altTxt, heading, text }) => {
         <h1 className="font-bold text-2xl sm:text-3xl py-7 heading__responsive">
           {heading}
         </h1>
-        <p className="text-lg "> {text}</p>
+        <p className="text-lg line-clamp-3"> {text}</p>
       </div>
     </div>
   );
