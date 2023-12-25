@@ -2,26 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+html,
+body:root {
+  min-height: 100%;
+  background-color: #fff7ee;
+}
+.featureCard__Responsive {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: space-between;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@media (max-width: 930px) {
+  .featureCard__Responsive {
+    grid-template-columns: auto;
+    justify-content: center;
+  }
+}
+@media (max-width: 340px) {
+  .text-responsive {
+    font-size: 27px;
+    transition: all ease-out 0.5s;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@media (max-width: 315px) {
+  .btn_txt_responsive {
+    font-size: 20px;
+  }
+}
+@media (min-width: 900px) {
+  .display__responsive {
+    display: none;
+  }
+}
+@media (max-width: 900px) {
+  .display__responsivee {
+    display: none;
+  }
+}
+@media (max-width: 1155px) {
+  .heading__responsive{
+    font-size: 22px !important;
+    transition: all ease-in-out 0.5s;
+  }
+}
+@media (max-width: 930px) {
+  .heading__responsive{
+    font-size: 30px !important;
+    transition: all ease-in-out 0.5s;
+  }
+}
+@media (max-width: 510px) {
+  .heading__responsive{
+    font-size: 24px !important;
+    transition: all ease-in-out 0.5s;
+  }
 }
