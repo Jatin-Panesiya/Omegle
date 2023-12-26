@@ -5,11 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { linkData } from "@/constants";
 import { RiMenu3Fill } from "react-icons/ri";
-const Header = () => {
+const Header = ({ setComponent }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   return (
-    <div className="flex items-center justify-between px-[3%] sm:px-[9%] py-4  bg-white sticky top-0 ">
+    <div className="flex items-center justify-between px-[3%] sm:px-[9%] py-4  bg-white sticky top-0 z-10 ">
       <div>
         <Image src={"/Logo.png"} alt="LOGO" width={200} height={60} />
       </div>
@@ -19,7 +19,7 @@ const Header = () => {
         <p>Talk to strangers!</p>
       </div>
       {/* Mobile */}
-      <div className="bg-[#ff7f00] text-white font-bold px-5  text-xl text-center py-0.5 display__responsive absolute left-0 w-full top-20">
+      <div className="bg-[#ff7f00] text-white font-bold px-5  text-xl text-center py-0.5 display__responsive absolute  left-0 w-full top-20">
         <p>Talk to strangers!</p>
       </div>
 
@@ -30,7 +30,14 @@ const Header = () => {
           {linkData.map(({ id, linkName, href }) => {
             return (
               <div key={id}>
-                <Link href={href}>{linkName}</Link>
+                <Link
+                  href={href}
+                  onClick={() =>
+                    id === 2 ? setComponent(id + 1) : setComponent(id)
+                  }
+                >
+                  {linkName}
+                </Link>
               </div>
             );
           })}
@@ -48,7 +55,15 @@ const Header = () => {
           {linkData.map(({ id, linkName, href }) => {
             return (
               <div key={id}>
-                <Link href={href}>{linkName}</Link>
+                <Link
+                  href={href}
+                  onClick={() => {
+                    setComponent(id);
+                    setIsMobile(false);
+                  }}
+                >
+                  {linkName}
+                </Link>
               </div>
             );
           })}
