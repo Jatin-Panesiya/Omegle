@@ -1,8 +1,10 @@
 "use client";
+
 import React, { useState } from "react";
 import { CiSquarePlus } from "react-icons/ci";
 import { CiSquareMinus } from "react-icons/ci";
 
+// Accordian component that handles toggling content visibility
 const Accordian = ({ heading, content }) => {
   const [isVisible, setIsVisible] = useState(false);
 

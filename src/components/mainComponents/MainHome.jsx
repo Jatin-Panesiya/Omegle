@@ -2,7 +2,10 @@ import React from "react";
 import Accordian from "../subComponents/Accordian";
 import { MdVideoCall } from "react-icons/md";
 import FeatureCard from "../subComponents/FeatureCard";
-
+import { RiFacebookFill } from "react-icons/ri";
+import { FaTwitter } from "react-icons/fa";
+import Link from "next/link";
+import { LuDot } from "react-icons/lu";
 const MainHome = ({ setComponent }) => {
   return (
     <>
@@ -22,9 +25,9 @@ const MainHome = ({ setComponent }) => {
         {/* Button to start a video call */}
         <button
           onClick={() => setComponent(2)}
-          className="flex items-center bg-[#3f9fff] transition-all duration-300 text-white px-4 py-2 shadow-2xl border-b-2 border-5 border-white shadow-[#3f9fff] rounded-xl gap-2 text-2xl mx-auto btn_txt_responsive"
+          className="flex items-center bg-[#3f9fff] transition-all duration-300 text-white px-5 py-2 shadow-xl border-2 border-5 border-white shadow-[#3f9fff69] rounded-2xl gap-2 text-2xl mx-auto btn_txt_responsive"
         >
-          <MdVideoCall className="text-3xl btn_txt_responsive" /> Start Video
+          <MdVideoCall className="text-4xl btn_txt_responsive" /> Start Video
           Call
         </button>
       </div>
@@ -87,24 +90,55 @@ const MainHome = ({ setComponent }) => {
 
       {/* Footer Section starts */}
 
-      {/* <div className="px-[3%] sm:px-[9%] py-10 ">
-        <div className="bg-white p-5 rounded-3xl">
+      <div className="px-[3%] sm:px-[9%] py-10 ">
+        <div className="bg-white p-5 rounded-3xl w-full object-cover">
           <div className=" py-2 flex justify-between">
             <div className="flex items-end">
-              <img src="/Logo.png" alt="LOGO" className="w-44 " />
-              <p className="font-bold ps-20 -rotate-12">Talk to strangers!</p>
+              <img
+                src="/Logo.png"
+                alt="LOGO"
+                className="w-16 sm:w-36  md:w-44 transition-all duration-200 responsive_0092 "
+              />
+              <p className="font-bold ps-5 sm:ps-20 -rotate-12 text-[8px] text__responsive__0092 sm:text-[16px] md:text-lg">
+                Talk to strangers!
+              </p>
             </div>
-            <div>
-              <button className="flex items-center bg-[#3b5998] text-white uppercase font-bold text-xs p-1 gap-2 rounded">
-                <FaFacebook className="text-lg text-[#3b5998]  " />
+            <div className="flex items-center gap-1">
+              <button className="flex items-center bg-[#3b5998] text-white uppercase font-bold text-[5px] md:text-[8px] px-1 p-0.5 gap-2 ">
+                <RiFacebookFill className=" text-[8px] md:text-[12px]  " />
                 Share
+              </button>
+              <button className="flex items-center bg-[#1b95e0] text-white uppercase font-bold text-[5px] md:text-[8px] px-1 p-0.5 gap-2 ">
+                <FaTwitter className=" text-[8px]  md:text-[12px] " />
+                Tweet
               </button>
             </div>
           </div>
 
-          <div className="bg-[#fff7ee] p-5"></div>
+          <div className="bg-[#fff7ee] p-5">
+            <img
+              src="/footerImage.png"
+              alt="Footer"
+              className="w-[500px] mx-auto rounded-xl"
+            />
+            <span className="flex items-center text-[4.5px] md:text-[8px] font-semibold pt-5 justify-center">
+              ©️ Omegle.com LLC
+              <LuDot />
+              <Link href="" className="underline text-[#ffa041]">
+                Terms of Service
+              </Link>
+              <LuDot />
+              <Link href="" className="underline text-[#ffa041]">
+                Pricavy Policy
+              </Link>
+              <LuDot />
+              <Link href="" className="underline text-[#ffa041]">
+                Community Guidelines
+              </Link>
+            </span>
+          </div>
         </div>
-      </div> */}
+      </div>
 
       {/* Footer Section ends  */}
 
@@ -123,7 +157,7 @@ const MainHome = ({ setComponent }) => {
 
       {/* FAQs Section starts  */}
 
-      <div className="px-[3%] sm:px-[9%] py-10">
+      <div className="px-[3%] sm:px-[9%] py-10" id="faq__Section">
         <h1 className="font-bold text-4xl py-5">FAQs</h1>
         {/* FAQs using Accordian */}
         <div>

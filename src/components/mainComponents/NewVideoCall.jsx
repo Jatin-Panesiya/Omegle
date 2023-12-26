@@ -4,7 +4,7 @@ import { MdVideoCall } from "react-icons/md";
 // NewVideoCall component with a prop `setComponent`
 const NewVideoCall = ({ setComponent }) => {
   return (
-    <div className="px-[3%] sm:px-[9%]">
+    <div className="px-[3%] sm:px-[9%] py-10">
       {/* Image for the video call */}
       <img
         src="/videoCallImg2.png"
@@ -15,7 +15,7 @@ const NewVideoCall = ({ setComponent }) => {
       {/* Button to initiate a new video call */}
       <button
         onClick={() => setComponent(2)}
-        className="flex items-center bg-[#22c55e] transition-all duration-300 text-white px-4 py-2 shadow-2xl border-2 border-5 border-white shadow-[#22c55e] rounded-xl my-5 gap-2 text-2xl mx-auto btn_txt_responsive"
+        className="flex items-center bg-[#22c55e] transition-all duration-300 text-white px-4 py-2 shadow-xl border-2 border-5 border-white shadow-[#22c55e4d] rounded-2xl my-5 gap-2 text-2xl mx-auto btn_txt_responsive"
       >
         <MdVideoCall className="text-xl sm:text-3xl" /> New Video Call
       </button>

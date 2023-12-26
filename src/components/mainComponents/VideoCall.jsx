@@ -41,7 +41,7 @@ const VideoCall = ({ setComponent }) => {
         <div>
           <button
             onClick={() => setComponent(3)}
-            className="flex items-center bg-[#ef4444] transition-all duration-300 text-white px-4 py-2 shadow-2xl border-2 border-5 border-white shadow-[#ef4444] rounded-xl gap-2 text-2xl mx-auto btn_txt_responsive"
+            className="flex items-center bg-[#ef4444] transition-all duration-300 text-white px-4 py-2 shadow-xl border-2 border-5 border-white shadow-[#ef444473] rounded-2xl gap-2 text-2xl mx-auto btn_txt_responsive"
           >
             <MdVideoCall className="text-xl sm:text-3xl" /> End Video Call
           </button>

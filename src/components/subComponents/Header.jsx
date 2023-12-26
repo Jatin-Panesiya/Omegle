@@ -11,7 +11,7 @@ const Header = ({ setComponent }) => {
   return (
     <div className="flex items-center justify-between px-[3%] sm:px-[9%] py-4  bg-white sticky top-0 z-10 ">
       <div>
-        <Image src={"/Logo.png"} alt="LOGO" width={200} height={60} />
+        <img src={"/Logo.png"} alt="LOGO" className="w-[160px] sm:w-[200px]" />
       </div>
 
       {/* desktop */}
@@ -19,7 +19,7 @@ const Header = ({ setComponent }) => {
         <p>Talk to strangers!</p>
       </div>
       {/* Mobile */}
-      <div className="bg-[#ff7f00] text-white font-bold px-5  text-xl text-center py-0.5 display__responsive absolute  left-0 w-full top-20">
+      <div className="bg-[#ff7f00] text-white font-bold px-5  text-xl text-center py-0.5 display__responsive absolute  left-0 w-full top-[70px]">
         <p>Talk to strangers!</p>
       </div>
 
@@ -51,7 +51,7 @@ const Header = ({ setComponent }) => {
 
       {/* Mobile Menu */}
       {isMobile && (
-        <div className="grid gap-7 font-bold md:hidden absolute bg-white w-full left-0 text-center top-20 py-10">
+        <div className="grid gap-7 font-bold md:hidden absolute bg-white w-full left-0 text-center top-[70px] py-10">
           {linkData.map(({ id, linkName, href }) => {
             return (
               <div key={id}>

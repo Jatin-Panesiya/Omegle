@@ -26,9 +26,9 @@ body{
   }
 }
 
-@media (max-width: 315px) {
+@media (max-width: 340px) {
   .btn_txt_responsive {
-    font-size: 20px;
+    font-size: 17px;
   }
 }
 @media (min-width: 900px) {
@@ -57,5 +57,15 @@ body{
   .heading__responsive{
     font-size: 24px !important;
     transition: all ease-in-out 0.5s;
+  }
+}
+
+@media (max-width: 305px) {
+  .responsive_0092{
+    width: 58px;
+  }
+  .text__responsive__0092{
+    font-size: 6.5px;
+
   }
 }

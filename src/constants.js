@@ -10,8 +10,8 @@ export const linkData = [
     linkName: "Live Video Call 💖",
   },
   {
-    id: 3,
-    href: "",
+    id: 1,
+    href: "#faq__Section",
     linkName: "FAQs",
   },
 ];
