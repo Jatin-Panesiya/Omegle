@@ -3,44 +3,27 @@ import { FaVolumeMute } from "react-icons/fa";
 import { FaCameraRotate } from "react-icons/fa6";
 import { IoMdMicOff } from "react-icons/io";
 import { MdVideoCall } from "react-icons/md";
+
+// VideoCall component taking a prop `setComponent`
 const VideoCall = ({ setComponent }) => {
   return (
     <div className="max-w-full py-10 px-[1%] sm:px-[3%]">
-      {/* Desktop View starts */}
-
-      <div className="w-full hidden md:grid grid-cols-2 gap-5">
+      {/* Images for the video call */}
+      <div className="w-[90%] relative md:static md:w-full inline md:grid grid-cols-2 gap-5">
         <img
           src="/videoCallImg1.png"
           alt="Video Call"
-          className=" rounded-3xl bg-white p-3"
+          className=" rounded-3xl bg-white p-3 h-[450px] object-cover md:h-auto"
         />
 
         <img
           src="/videoCallImg2.png"
           alt="Video Call"
-          className="  rounded-3xl bg-white p-3"
+          className="  rounded-3xl bg-white p-3 absolute md:static bottom-0 right-0 w-[40%] md:w-auto object-cover h-[38%] md:h-auto m-4 md:m-0"
         />
       </div>
-      {/* Desktop View ends */}
 
-      {/* Mobile View starts */}
-
-      <div className="w-[90%] mx-auto md:hidden relative ">
-        <div>
-          <img
-            src="/videoCallImg1.png"
-            alt="Video Call"
-            className=" rounded-3xl bg-white p-3 h-[450px] object-cover"
-          />
-          <img
-            src="/videoCallImg2.png"
-            alt="Video Call"
-            className="  rounded-2xl bg-white  absolute bottom-0  right-0 w-[40%] p-2 m-4  h-[38%] object-cover"
-          />
-        </div>
-      </div>
-      {/* Mobile View ends */}
-
+      {/* Buttons for muting audio, rotating camera, and turning off microphone */}
       <div>
         <div className="flex gap-4 justify-center py-5">
           <button className="bg-[#ff7f00] text-white p-2 rounded-xl text-2xl">
@@ -53,6 +36,8 @@ const VideoCall = ({ setComponent }) => {
             <IoMdMicOff />
           </button>
         </div>
+
+        {/* Button to end the video call */}
         <div>
           <button
             onClick={() => setComponent(3)}
@@ -63,10 +48,11 @@ const VideoCall = ({ setComponent }) => {
         </div>
       </div>
 
-      <div className="pt-10 pb-5 text-lg text-center">
+      {/* Description of Omegle */}
+      <div className="pt-10 pb-5 text-lg  px-2">
         <p>
           Omegle is a Great Spot to meet people online. Where a stranger can
-          initiate Video Comversation with another stranger at random over the
+          initiate Video Conversation with another stranger at random over the
           internet using webcam. Download Omegle App for mobile, Start chatting
           instantly without Registration.
         </p>

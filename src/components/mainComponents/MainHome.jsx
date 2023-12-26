@@ -8,15 +8,18 @@ const MainHome = ({ setComponent }) => {
     <>
       {/* Hero Section Starts */}
       <div className="px-[3%] sm:px-[9%] text-center py-16 ">
+        {/* Title */}
         <h1 className="font-bold text-responsive text-3xl md:text-4xl lg:text-[46px] transition-all duration-300">
           Omegle Video Call
         </h1>
+        {/* Description */}
         <p className="py-5 md:py-10 text-[16px] sm:text-lg ">
           Omegle is a Great Spot to meet people online. Where a stranger can
           initiate Video Conversation with another stranger at random over the
           internet using webcam. Download Omegle App for mobile, Start chatting
           instantly without Registration.
         </p>
+        {/* Button to start a video call */}
         <button
           onClick={() => setComponent(2)}
           className="flex items-center bg-[#3f9fff] transition-all duration-300 text-white px-4 py-2 shadow-2xl border-b-2 border-5 border-white shadow-[#3f9fff] rounded-xl gap-2 text-2xl mx-auto btn_txt_responsive"
@@ -30,6 +33,7 @@ const MainHome = ({ setComponent }) => {
       {/* Features Section Starts*/}
 
       <div className="featureCard__Responsive gap-5 px-[3%] sm:px-[9%] py-5 ">
+        {/* Feature Cards */}
         <FeatureCard
           imagePath="/talkWithStrangers.png"
           altTxt="Talk To Strangers"
@@ -54,6 +58,7 @@ const MainHome = ({ setComponent }) => {
 
       {/* Omegle Video Call info section Starts */}
       <div className="px-[3%] sm:px-[9%]">
+        {/* Info about Omegle */}
         <h1 className="font-bold text-3xl sm:text-4xl py-5">
           Omegle Video Call
         </h1>
@@ -120,7 +125,7 @@ const MainHome = ({ setComponent }) => {
 
       <div className="px-[3%] sm:px-[9%] py-10">
         <h1 className="font-bold text-4xl py-5">FAQs</h1>
-
+        {/* FAQs using Accordian */}
         <div>
           <Accordian
             heading={"What is Omegle and how does it work?"}
