@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Accordian from "../subComponents/Accordian";
 import { MdVideoCall } from "react-icons/md";
 import FeatureCard from "../subComponents/FeatureCard";
@@ -7,6 +9,9 @@ import { FaTwitter } from "react-icons/fa";
 import Link from "next/link";
 import { LuDot } from "react-icons/lu";
 const MainHome = ({ setComponent }) => {
+  //state to manage accordian of FAQs
+  const [visibleDiv, setVisibleDiv] = useState(1);
+
   return (
     <>
       {/* Hero Section Starts */}
@@ -166,30 +171,45 @@ const MainHome = ({ setComponent }) => {
             content={
               "Omegle is a platform that enables users to engage in random one-on-one video chats with strangers from around the world. The systems pairs users randomly, fostering an environment for spontaneous and diverse conversations."
             }
+            id="1"
+            visibleDiv={visibleDiv}
+            setVisibleDiv={setVisibleDiv}
           />
           <Accordian
             heading={"Is Omegle safe for users of all ages?"}
             content={
               "Omegle is a platform that enables users to engage in random one-on-one video chats with strangers from around the world. The systems pairs users randomly, fostering an environment for spontaneous and diverse conversations."
             }
+            id="2"
+            visibleDiv={visibleDiv}
+            setVisibleDiv={setVisibleDiv}
           />
           <Accordian
             heading={"Can I customize my omegle experience?"}
             content={
               "Omegle is a platform that enables users to engage in random one-on-one video chats with strangers from around the world. The systems pairs users randomly, fostering an environment for spontaneous and diverse conversations."
             }
+            id="3"
+            visibleDiv={visibleDiv}
+            setVisibleDiv={setVisibleDiv}
           />
           <Accordian
             heading={"How do I start a chat on Omegle?"}
             content={
               "Omegle is a platform that enables users to engage in random one-on-one video chats with strangers from around the world. The systems pairs users randomly, fostering an environment for spontaneous and diverse conversations."
             }
+            id="4"
+            visibleDiv={visibleDiv}
+            setVisibleDiv={setVisibleDiv}
           />
           <Accordian
             heading={"Are my conversation on Omegle Private?"}
             content={
               "Omegle is a platform that enables users to engage in random one-on-one video chats with strangers from around the world. The systems pairs users randomly, fostering an environment for spontaneous and diverse conversations."
             }
+            id="5"
+            visibleDiv={visibleDiv}
+            setVisibleDiv={setVisibleDiv}
           />
         </div>
       </div>

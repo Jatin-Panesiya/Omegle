@@ -1,11 +1,17 @@
-import React from "react";
-import { FaVolumeMute } from "react-icons/fa";
+"use client";
+
+import React, { useState } from "react";
+import { HiSpeakerXMark } from "react-icons/hi2";
 import { FaCameraRotate } from "react-icons/fa6";
-import { IoMdMicOff } from "react-icons/io";
+import { FaMicrophoneSlash } from "react-icons/fa6";
+import { IoMic } from "react-icons/io5";
 import { MdVideoCall } from "react-icons/md";
+import { HiSpeakerWave } from "react-icons/hi2";
 
 // VideoCall component taking a prop `setComponent`
 const VideoCall = ({ setComponent }) => {
+  const [isMicOn, setIsMicOn] = useState(false);
+  const [isSound, setIsSound] = useState(false);
   return (
     <div className="max-w-full py-10 px-[1%] sm:px-[3%]">
       {/* Images for the video call */}
@@ -26,14 +32,20 @@ const VideoCall = ({ setComponent }) => {
       {/* Buttons for muting audio, rotating camera, and turning off microphone */}
       <div>
         <div className="flex gap-4 justify-center py-5">
-          <button className="bg-[#ff7f00] text-white p-2 rounded-xl text-2xl">
-            <FaVolumeMute />
+          <button
+            className="bg-[#ff7f00] text-white p-2 rounded-xl text-2xl"
+            onClick={() => setIsSound(!isSound)}
+          >
+            {isSound ? <HiSpeakerWave /> : <HiSpeakerXMark />}
           </button>
           <button className="bg-[#ff7f00] text-white p-2 rounded-xl text-2xl">
             <FaCameraRotate />
           </button>
-          <button className="bg-[#ff7f00] text-white p-2 rounded-xl text-2xl">
-            <IoMdMicOff />
+          <button
+            className="bg-[#ff7f00] text-white p-2 rounded-xl text-2xl"
+            onClick={() => setIsMicOn(!isMicOn)}
+          >
+            {isMicOn ? <IoMic /> : <FaMicrophoneSlash />}
           </button>
         </div>
 
