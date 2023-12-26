@@ -10,8 +10,8 @@ import { HiSpeakerWave } from "react-icons/hi2";
 
 // VideoCall component taking a prop `setComponent`
 const VideoCall = ({ setComponent }) => {
-  const [isMicOn, setIsMicOn] = useState(false);
-  const [isSound, setIsSound] = useState(false);
+  const [isMicOn, setIsMicOn] = useState(true);
+  const [isSound, setIsSound] = useState(true);
   return (
     <div className="max-w-full py-10 px-[1%] sm:px-[3%]">
       {/* Images for the video call */}

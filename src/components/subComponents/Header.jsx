@@ -27,9 +27,9 @@ const Header = ({ setComponent }) => {
 
       <div className="font-bold ">
         <div className="hidden md:flex gap-7">
-          {linkData.map(({ id, linkName, href }) => {
+          {linkData.map(({ id, linkName, href }, key) => {
             return (
-              <div key={id}>
+              <div key={key}>
                 <Link
                   href={href}
                   onClick={() =>

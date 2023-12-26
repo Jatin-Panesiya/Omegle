@@ -8,9 +8,11 @@ import { RiFacebookFill } from "react-icons/ri";
 import { FaTwitter } from "react-icons/fa";
 import Link from "next/link";
 import { LuDot } from "react-icons/lu";
+
+
 const MainHome = ({ setComponent }) => {
   //state to manage accordian of FAQs
-  const [visibleDiv, setVisibleDiv] = useState(1);
+  const [visibleDiv, setVisibleDiv] = useState(0);
 
   return (
     <>
