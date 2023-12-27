@@ -7,6 +7,7 @@ import { FaMicrophoneSlash } from "react-icons/fa6";
 import { IoMic } from "react-icons/io5";
 import { MdVideoCall } from "react-icons/md";
 import { HiSpeakerWave } from "react-icons/hi2";
+import Image from "next/image";
 
 // VideoCall component taking a prop `setComponent`
 const VideoCall = ({ setComponent }) => {
@@ -16,16 +17,20 @@ const VideoCall = ({ setComponent }) => {
     <div className="pt-9 px-3%">
       {/* Images for the video call */}
       <div className="w-[90%] relative 700:static 700:w-full inline 700:grid grid-cols-2 gap-7">
-        <img
+        <Image
           src="/videoCallImg1.png"
           alt="Video Call"
           className=" rounded-30 bg-white p-2 700:p-4 h-[503px] object-cover 700:h-auto"
+          width={700}
+          height={503}
         />
 
-        <img
+        <Image
           src="/videoCallImg2.png"
           alt="Video Call"
           className=" rounded-xl 700:rounded-30 bg-white h-[181px] p-2 700:p-4 absolute 700:static bottom-0 right-0 w-[40%] 700:w-auto object-cover  700:h-auto m-4 700:m-0"
+          width={700}
+          height={503}
         />
       </div>
 

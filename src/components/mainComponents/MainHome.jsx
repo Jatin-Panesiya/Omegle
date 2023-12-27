@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Accordian from "../subComponents/Accordian";
 import FeatureCard from "../subComponents/FeatureCard";
+import Image from "next/image";
 
 const MainHome = ({ setComponent }) => {
   //state to manage accordian of FAQs
@@ -105,15 +106,19 @@ const MainHome = ({ setComponent }) => {
 
       <div className="py-7 700:py-20 ">
         <div className="bg-white p-3 rounded-xl ">
-          <img
+          <Image
             src="/footerImage.png"
             alt="IMAGE"
             className="hidden 700:block rounded-md"
+            width={1250}
+            height={609}
           />
-          <img
+          <Image
             src="/footerImage2.png"
             alt="IMAGE"
             className="block 700:hidden rounded-md"
+            width={748}
+            height={609}
           />
         </div>
       </div>

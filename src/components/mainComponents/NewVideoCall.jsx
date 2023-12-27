@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 // NewVideoCall component with a prop `setComponent`
@@ -5,10 +6,12 @@ const NewVideoCall = ({ setComponent }) => {
   return (
     <div className="px-3% sm:px-9% 700:pt-7  pt-9">
       {/* Image for the video call */}
-      <img
+      <Image
         src="/videoCallImg2.png"
         alt="Video Call"
         className="rounded-30 700:w-[885px] w-[752px] object-cover p-3 bg-white  700:h-[495px] h-[500px] mx-auto"
+        height={495}
+        width={885}
       />
 
       {/* Button to initiate a new video call */}

@@ -11,11 +11,13 @@ const Header = ({ setComponent }) => {
   return (
     <div className="flex items-center justify-between px-[3%] sm:px-[9%] py-4  bg-white sticky top-0 z-10 ">
       <div>
-        <img
+        <Image
           src={"/LOGO.svg"}
           alt="LOGO"
           className="700:w-60 300:w-40 400:w-44 500:w-48 600:w-52 h-14 w-36 cursor-pointer"
           onClick={() => setComponent(1)}
+          width={240}
+          height={60}
         />
       </div>
 
