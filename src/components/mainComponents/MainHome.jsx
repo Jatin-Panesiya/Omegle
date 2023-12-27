@@ -76,7 +76,7 @@ const MainHome = ({ setComponent }) => {
       {/* Omegle Video Call info section Starts */}
       <div>
         {/* Info about Omegle */}
-        <h1 className="font-bold text-3xl 700:text-4xl pt-10 70:pt-24">
+        <h1 className="font-bold text-3xl 700:text-4xl pt-10 700:pt-24">
           Omegle Video Call
         </h1>
         <p className="pt-5 700:pt-7 pb-5 700:text-xl text-lg">
