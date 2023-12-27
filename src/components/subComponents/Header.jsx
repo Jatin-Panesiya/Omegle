@@ -11,15 +11,20 @@ const Header = ({ setComponent }) => {
   return (
     <div className="flex items-center justify-between px-[3%] sm:px-[9%] py-4  bg-white sticky top-0 z-10 ">
       <div>
-        <img src={"/Logo.png"} alt="LOGO" className="w-[160px] sm:w-[200px]" />
+        <img
+          src={"/LOGO.svg"}
+          alt="LOGO"
+          className="700:w-60 300:w-40 400:w-44 500:w-48 600:w-52 h-14 w-36 cursor-pointer"
+          onClick={() => setComponent(1)}
+        />
       </div>
 
       {/* desktop */}
-      <div className="bg-[#fff2e6] text-[#ff7f00] font-bold px-5 py-2.5 rounded-3xl text-[22px]  display__responsivee">
+      <div className="bg-[#FF7F00] bg-opacity-10 text-[#FF7F00] font-bold px-8 py-2.5 rounded-3xl text-2xl 1000:block hidden  ">
         <p>Talk to strangers!</p>
       </div>
       {/* Mobile */}
-      <div className="bg-[#ff7f00] text-white font-bold px-5  text-xl text-center py-0.5 display__responsive absolute  left-0 w-full top-[70px]">
+      <div className="bg-[#ff7f00] text-white font-bold px-5 text-base  700:text-xl text-center py-0.5  1000:hidden absolute  left-0 w-full top-20">
         <p>Talk to strangers!</p>
       </div>
 
@@ -35,6 +40,7 @@ const Header = ({ setComponent }) => {
                   onClick={() =>
                     id === 2 ? setComponent(id + 1) : setComponent(id)
                   }
+                  className="text-base"
                 >
                   {linkName}
                 </Link>
