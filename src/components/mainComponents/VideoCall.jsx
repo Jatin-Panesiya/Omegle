@@ -1,34 +1,60 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { HiSpeakerXMark } from "react-icons/hi2";
 import { FaCameraRotate } from "react-icons/fa6";
 import { FaMicrophoneSlash } from "react-icons/fa6";
 import { IoMic } from "react-icons/io5";
-import { MdVideoCall } from "react-icons/md";
 import { HiSpeakerWave } from "react-icons/hi2";
 import Image from "next/image";
+import { useVideoStream } from "@/useVideoStream";
 
 // VideoCall component taking a prop `setComponent`
 const VideoCall = ({ setComponent }) => {
   const [isMicOn, setIsMicOn] = useState(false);
   const [isSound, setIsSound] = useState(false);
+  const videoRef = useRef(null);
+  const videoRef2 = useRef(null);
+  useVideoStream(videoRef);
+  useVideoStream(videoRef2);
+
   return (
     <div className="pt-9 px-3%">
       {/* Images for the video call */}
       <div className="w-[90%] relative 700:static 700:w-full inline 700:grid grid-cols-2 gap-7">
-        <Image
+        {/* <Image
           src="/videoCallImg1.png"
           alt="Video Call"
           className=" rounded-30 bg-white p-2 700:p-4 h-[503px] object-cover 700:h-auto"
           width={700}
           height={503}
-        />
-
-        <Image
+        /> */}
+        {/*<Image
           src="/videoCallImg2.png"
           alt="Video Call"
           className=" rounded-xl 700:rounded-30 bg-white h-[181px] p-2 700:p-4 absolute 700:static bottom-0 right-0 w-[40%] 700:w-auto object-cover  700:h-auto m-4 700:m-0"
+          width={700}
+          height={503}
+        /> */}
+
+        <video
+          ref={videoRef2}
+          playsInline
+          autoPlay={true}
+          controls={false}
+          crossOrigin="anonymous"
+          className=" rounded-30 bg-white p-2 700:p-4 h-[503px] object-cover 700:h-auto"
+          width={700}
+          height={503}
+        />
+
+        <video
+          ref={videoRef}
+          playsInline
+          autoPlay={true}
+          controls={false}
+          crossOrigin="anonymous"
+          className="rounded-xl 700:rounded-30 bg-white h-[181px] p-2 700:p-4 absolute 700:static bottom-0 right-0 w-[40%] 700:w-full object-cover  700:h-auto m-4 700:m-0"
           width={700}
           height={503}
         />
@@ -61,7 +87,7 @@ const VideoCall = ({ setComponent }) => {
         {/* Button to end the video call */}
         <div>
           <button
-            onClick={() => setComponent(3)}
+            onClick={() => setComponent(2)}
             className="flex items-center bg-[#ef4444] transition-all duration-300 text-white px-5 py-3 shadow-xl border-2 border-5 border-white shadow-[#ef444473] rounded-2xl gap-2 text-base 700:text-2xl mx-auto 700:btn_txt_responsive"
           >
             <svg

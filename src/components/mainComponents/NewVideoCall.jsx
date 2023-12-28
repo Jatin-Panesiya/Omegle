@@ -1,14 +1,47 @@
+"use client";
 import Image from "next/image";
-import React from "react";
-
+import React, { useEffect, useRef } from "react";
+import VideoCall from "./VideoCall";
+import { useVideoStream } from "@/useVideoStream";
 // NewVideoCall component with a prop `setComponent`
+
 const NewVideoCall = ({ setComponent }) => {
+  const videoRef1 = useRef(null);
+  useVideoStream(videoRef1);
+
+  // const videoRef = useRef();
+  // useEffect(() => {
+  //   if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+  //     navigator.mediaDevices
+  //       .getUserMedia({
+  //         video: true,
+  //       })
+  //       .then((mediaStream) => {
+  //         if (!videoRef.current) return;
+  //         videoRef.current.srcObject = mediaStream;
+  //       })
+  //       .catch((err) => {
+  //         alert(`err ${err} ${JSON.stringify(err)}`);
+  //       });
+  //   }
+  // }, []);
+
   return (
     <div className="px-3% sm:px-9% 700:pt-7  pt-9">
       {/* Image for the video call */}
-      <Image
+      {/* <Image
         src="/videoCallImg2.png"
         alt="Video Call"
+        className="rounded-30 700:w-[885px] w-[752px] object-cover p-3 bg-white  700:h-[495px] h-[500px] mx-auto"
+        height={495}
+        width={885}
+      /> */}
+      <video
+        ref={videoRef1}
+        playsInline
+        autoPlay={true}
+        controls={false}
+        crossOrigin="anonymous"
         className="rounded-30 700:w-[885px] w-[752px] object-cover p-3 bg-white  700:h-[495px] h-[500px] mx-auto"
         height={495}
         width={885}
@@ -16,7 +49,7 @@ const NewVideoCall = ({ setComponent }) => {
 
       {/* Button to initiate a new video call */}
       <button
-        onClick={() => setComponent(2)}
+        onClick={() => setComponent(1)}
         className="flex items-center bg-[#22C55E] transition-all duration-300 text-white px-5 py-3 shadow-xl border-2 border-5 border-white shadow-[#22c55e4d] rounded-2xl gap-2 text-base 700:text-2xl mx-auto 700:btn_txt_responsive my-7"
       >
         <svg

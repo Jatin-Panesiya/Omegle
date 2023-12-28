@@ -37,13 +37,7 @@ const Header = ({ setComponent }) => {
           {linkData.map(({ id, linkName, href }, key) => {
             return (
               <div key={key}>
-                <Link
-                  href={href}
-                  onClick={() =>
-                    id === 2 ? setComponent(id + 1) : setComponent(id)
-                  }
-                  className="text-base"
-                >
+                <Link href={href} className="text-base">
                   {linkName}
                 </Link>
               </div>
