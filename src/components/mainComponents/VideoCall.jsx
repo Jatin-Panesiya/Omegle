@@ -8,14 +8,19 @@ import { IoMic } from "react-icons/io5";
 import { HiSpeakerWave } from "react-icons/hi2";
 import Image from "next/image";
 import { useVideoStream } from "@/useVideoStream";
+import useVideoCallTest from "@/useVideoCallTest";
 
 // VideoCall component taking a prop `setComponent`
 const VideoCall = ({ setComponent }) => {
   const [isMicOn, setIsMicOn] = useState(false);
   const [isSound, setIsSound] = useState(false);
+  const { localVideoRef, remoteVideoRef } = useVideoCallTest(
+    "b7e28480-3846-4aaa-97da-6ef9b47d45bc"
+  );
+
   const videoRef = useRef(null);
   const videoRef2 = useRef(null);
-  
+
   useVideoStream(videoRef, "Stream Link");
   useVideoStream(videoRef2, "Stream Link");
 
@@ -23,23 +28,8 @@ const VideoCall = ({ setComponent }) => {
     <div className="pt-9 px-3%">
       {/* Images for the video call */}
       <div className="w-[90%] relative 700:static 700:w-full inline 700:grid grid-cols-2 gap-7">
-        {/* <Image
-          src="/videoCallImg1.png"
-          alt="Video Call"
-          className=" rounded-30 bg-white p-2 700:p-4 h-[503px] object-cover 700:h-auto"
-          width={700}
-          height={503}
-        /> */}
-        {/*<Image
-          src="/videoCallImg2.png"
-          alt="Video Call"
-          className=" rounded-xl 700:rounded-30 bg-white h-[181px] p-2 700:p-4 absolute 700:static bottom-0 right-0 w-[40%] 700:w-auto object-cover  700:h-auto m-4 700:m-0"
-          width={700}
-          height={503}
-        /> */}
-
         <video
-          ref={videoRef2}
+          ref={remoteVideoRef}
           playsInline
           autoPlay={true}
           controls={false}
@@ -50,7 +40,7 @@ const VideoCall = ({ setComponent }) => {
         />
 
         <video
-          ref={videoRef}
+          ref={localVideoRef}
           playsInline
           autoPlay={true}
           controls={false}

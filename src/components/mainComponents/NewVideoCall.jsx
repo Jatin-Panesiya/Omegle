@@ -3,42 +3,20 @@ import Image from "next/image";
 import React, { useEffect, useRef } from "react";
 import VideoCall from "./VideoCall";
 import { useVideoStream } from "@/useVideoStream";
-// NewVideoCall component with a prop `setComponent`
+import useVideoCallTest from "@/useVideoCallTest";
 
 const NewVideoCall = ({ setComponent }) => {
-  const videoRef1 = useRef(null);
-  
-  useVideoStream(videoRef1, "Stream Link");
+  const { localVideoRef, remoteVideoRef } = useVideoCallTest({
+    /*roomId*/
+  });
 
-  // const videoRef = useRef();
-  // useEffect(() => {
-  //   if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-  //     navigator.mediaDevices
-  //       .getUserMedia({
-  //         video: true,
-  //       })
-  //       .then((mediaStream) => {
-  //         if (!videoRef.current) return;
-  //         videoRef.current.srcObject = mediaStream;
-  //       })
-  //       .catch((err) => {
-  //         alert(`err ${err} ${JSON.stringify(err)}`);
-  //       });
-  //   }
-  // }, []);
+  const videoRef1 = useRef(null);
+  useVideoStream(videoRef1);
 
   return (
     <div className="px-3% sm:px-9% 700:pt-7  pt-9">
-      {/* Image for the video call */}
-      {/* <Image
-        src="/videoCallImg2.png"
-        alt="Video Call"
-        className="rounded-30 700:w-[885px] w-[752px] object-cover p-3 bg-white  700:h-[495px] h-[500px] mx-auto"
-        height={495}
-        width={885}
-      /> */}
       <video
-        ref={videoRef1}
+        ref={localVideoRef}
         playsInline
         autoPlay={true}
         controls={false}

@@ -6,12 +6,12 @@ export function useVideoStream(videoRef, streamLink) {
 
     const getVideoStream = async () => {
       try {
-        await navigator.mediaDevices.getUserMedia({
+        const stream = await navigator.mediaDevices.getUserMedia({
           video: true,
           audio: false,
         });
         if (videoRef.current) {
-          videoRef.current.srcObject = streamLink;
+          videoRef.current.srcObject = stream;
         }
       } catch (error) {
         alert(`Error accessing video: ${error.message}`);

@@ -6,7 +6,7 @@ import MainHome from "@/components/mainComponents/MainHome";
 import { useState } from "react";
 
 export default function Home() {
-  const [component, setComponent] = useState(1);
+  const [component, setComponent] = useState(2);
 
   return (
     <>
