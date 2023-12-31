@@ -15,8 +15,9 @@ const VideoCall = ({ setComponent }) => {
   const [isSound, setIsSound] = useState(false);
   const videoRef = useRef(null);
   const videoRef2 = useRef(null);
-  useVideoStream(videoRef);
-  useVideoStream(videoRef2);
+  
+  useVideoStream(videoRef, "Stream Link");
+  useVideoStream(videoRef2, "Stream Link");
 
   return (
     <div className="pt-9 px-3%">

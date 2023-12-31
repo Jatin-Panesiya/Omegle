@@ -1,16 +1,17 @@
 import { useEffect, useRef } from "react";
 
-export function useVideoStream(videoRef) {
+export function useVideoStream(videoRef, streamLink) {
   useEffect(() => {
     if (!videoRef || !videoRef.current) return;
 
     const getVideoStream = async () => {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({
+        await navigator.mediaDevices.getUserMedia({
           video: true,
+          audio: false,
         });
         if (videoRef.current) {
-          videoRef.current.srcObject = stream;
+          videoRef.current.srcObject = streamLink;
         }
       } catch (error) {
         alert(`Error accessing video: ${error.message}`);

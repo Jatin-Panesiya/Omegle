@@ -7,7 +7,8 @@ import { useVideoStream } from "@/useVideoStream";
 
 const NewVideoCall = ({ setComponent }) => {
   const videoRef1 = useRef(null);
-  useVideoStream(videoRef1);
+  
+  useVideoStream(videoRef1, "Stream Link");
 
   // const videoRef = useRef();
   // useEffect(() => {
