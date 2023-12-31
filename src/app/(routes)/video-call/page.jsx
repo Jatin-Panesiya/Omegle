@@ -5,15 +5,15 @@ import Footer from "@/components/subComponents/Footer";
 import Header from "@/components/subComponents/Header";
 import React, { useState } from "react";
 const page = () => {
-  const [component, setComponent] = useState(1);
+  const [component, setComponent] = useState(2);
 
   return (
     <>
       <Header />
-      {component === 1 ? (
-        <VideoCall setComponent={setComponent} />
-      ) : (
+      {component === 2 ? (
         <NewVideoCall setComponent={setComponent} />
+      ) : (
+        <VideoCall setComponent={setComponent} />
       )}
       <Footer />
     </>
