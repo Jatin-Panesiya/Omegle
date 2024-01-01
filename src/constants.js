@@ -10,7 +10,7 @@ export const linkData = [
     linkName: "Live Video Call 💖",
   },
   {
-    id: 1,
+    id: 3,
     href: "/#faq__Section",
     linkName: "FAQs",
   },
