@@ -5,6 +5,7 @@ import Accordian from "../subComponents/Accordian";
 import FeatureCard from "../subComponents/FeatureCard";
 import Image from "next/image";
 import Link from "next/link";
+import { accordianData, featureCard } from "@/constants";
 
 const MainHome = () => {
   //state to manage accordian of FAQs
@@ -31,19 +32,13 @@ const MainHome = () => {
             href={"/video-call"}
             className="flex items-center bg-[#3f9fff] transition-all duration-300 text-white px-7 py-3 shadow-xl shadow-[#3f9fff69] gap-4 text-2xl mx-auto btn_txt_responsive"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              viewBox="0 0 32 32"
-              fill="none"
+            <Image
+              src={"/videoIcon.svg"}
+              alt="videoIcon"
+              width={32}
+              height={32}
               className="w-6 h-6 700:w-8 700:h-8"
-            >
-              <path
-                d="M21.3333 5.33333C22.0697 5.33333 22.6666 5.93029 22.6666 6.66667V12.2667L29.6177 7.40095C29.9193 7.1898 30.335 7.26316 30.5461 7.5648C30.6245 7.67685 30.6666 7.81032 30.6666 7.94711V24.0529C30.6666 24.4211 30.3681 24.7196 29.9999 24.7196C29.8631 24.7196 29.7297 24.6775 29.6177 24.5991L22.6666 19.7333V25.3333C22.6666 26.0697 22.0697 26.6667 21.3333 26.6667H2.66659C1.93021 26.6667 1.33325 26.0697 1.33325 25.3333V6.66667C1.33325 5.93029 1.93021 5.33333 2.66659 5.33333H21.3333ZM9.86659 11.7716C9.60885 11.7716 9.39383 11.9544 9.34409 12.1974L9.33325 12.3049V19.6951C9.33325 19.7965 9.36217 19.8959 9.41664 19.9815C9.555 20.1989 9.82469 20.2821 10.0564 20.1936L10.1529 20.1451L15.9595 16.45C16.0254 16.408 16.0813 16.3521 16.1231 16.2864C16.2615 16.0689 16.2227 15.7893 16.0443 15.6169L15.9595 15.55L10.1529 11.8549C10.0673 11.8005 9.96801 11.7716 9.86659 11.7716Z"
-                fill="white"
-              />
-            </svg>
+            />
             Start Video Call
           </Link>
         </button>
@@ -54,24 +49,17 @@ const MainHome = () => {
 
       <div className="featureCard__Responsive gap-5 pt-10 700:pt-24  ">
         {/* Feature Cards */}
-        <FeatureCard
-          imagePath="/cardImage1.png"
-          altTxt="Talk To Strangers"
-          heading="Talk to Strangers "
-          text="The internet is full of amazing people, Omegle lets you chat with them."
-        />
-        <FeatureCard
-          imagePath="/cardImage2.png"
-          altTxt="Live Video Chat"
-          heading="Live Video Chat"
-          text="Texting and webcamming are two ways in omegle to connect with stranger"
-        />
-        <FeatureCard
-          imagePath="/cardImage3.png"
-          altTxt="Interact with Girls"
-          heading="Interact with Girls"
-          text="Using college email address Omegle lets you meet other college students."
-        />
+        {featureCard.map(({ id, imagePath, altTxt, heading, text }) => {
+          return (
+            <FeatureCard
+              key={id}
+              imagePath={imagePath}
+              altTxt={altTxt}
+              heading={heading}
+              text={text}
+            />
+          );
+        })}
       </div>
 
       {/* Features Section Ends*/}
@@ -111,14 +99,14 @@ const MainHome = () => {
         <div className="bg-white p-3 rounded-xl ">
           <Image
             src="/footerImage.png"
-            alt="IMAGE"
+            alt="footer image"
             className="hidden 700:block rounded-md"
             width={1250}
             height={609}
           />
           <Image
             src="/footerImage2.png"
-            alt="IMAGE"
+            alt="footer image"
             className="block 700:hidden rounded-md"
             width={748}
             height={609}
@@ -149,59 +137,22 @@ const MainHome = () => {
         </h1>
         {/* FAQs using Accordian */}
         <div>
-          <Accordian
-            heading={"What is Omegle and how does it work?"}
-            content={
-              "Omegle is a platform that enables users to engage in random one-on-one video chats with strangers from around the world. The systems pairs users randomly, fostering an environment for spontaneous and diverse conversations."
-            }
-            id="1"
-            visibleDiv={visibleDiv}
-            setVisibleDiv={setVisibleDiv}
-          />
-          <Accordian
-            heading={"Is Omegle safe for users of all ages?"}
-            content={
-              "Omegle is a platform that enables users to engage in random one-on-one video chats with strangers from around the world. The systems pairs users randomly, fostering an environment for spontaneous and diverse conversations."
-            }
-            id="2"
-            visibleDiv={visibleDiv}
-            setVisibleDiv={setVisibleDiv}
-          />
-          <Accordian
-            heading={"Can I customize my omegle experience?"}
-            content={
-              "Omegle is a platform that enables users to engage in random one-on-one video chats with strangers from around the world. The systems pairs users randomly, fostering an environment for spontaneous and diverse conversations."
-            }
-            id="3"
-            visibleDiv={visibleDiv}
-            setVisibleDiv={setVisibleDiv}
-          />
-          <Accordian
-            heading={"How do I start a chat on Omegle?"}
-            content={
-              "Omegle is a platform that enables users to engage in random one-on-one video chats with strangers from around the world. The systems pairs users randomly, fostering an environment for spontaneous and diverse conversations."
-            }
-            id="4"
-            visibleDiv={visibleDiv}
-            setVisibleDiv={setVisibleDiv}
-          />
-          <Accordian
-            heading={"Are my conversation on Omegle Private?"}
-            content={
-              "Omegle is a platform that enables users to engage in random one-on-one video chats with strangers from around the world. The systems pairs users randomly, fostering an environment for spontaneous and diverse conversations."
-            }
-            id="5"
-            visibleDiv={visibleDiv}
-            setVisibleDiv={setVisibleDiv}
-          />
+          {accordianData.map(({ id, heading, content }) => {
+            return (
+              <Accordian
+                key={id}
+                heading={heading}
+                content={content}
+                visibleDiv={visibleDiv}
+                setVisibleDiv={setVisibleDiv}
+                id={id}
+              />
+            );
+          })}
         </div>
       </div>
 
       {/* FAQs Section Ends  */}
-
-      {/* Footer  */}
-
-      {/* Footer  */}
     </div>
   );
 };

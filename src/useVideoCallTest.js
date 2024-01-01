@@ -7,7 +7,7 @@ const useVideoCallTest = (roomId) => {
   const remoteVideoRef = useRef(null);
 
   useEffect(() => {
-    socket.current = io("https://random-server-n6sz.onrender.com", {
+    socket.current = io("http://localhost:3005/", {
       forceNew: true,
     });
 
@@ -20,6 +20,7 @@ const useVideoCallTest = (roomId) => {
 
         socket.current.on("user-connected", (userId) => {
           const peerConnection = new RTCPeerConnection();
+
           stream
             .getTracks()
             .forEach((track) => peerConnection.addTrack(track, stream));
@@ -30,10 +31,21 @@ const useVideoCallTest = (roomId) => {
 
           peerConnection
             .createOffer()
-            .then((offer) => peerConnection.setLocalDescription(offer))
+            .then((createdOffer) =>
+              peerConnection.setLocalDescription(createdOffer)
+            )
             .then(() => {
-              socket.current.emit("offer", offer, userId);
-            });
+              // Wait for ICE candidates to gather before sending the offer
+              peerConnection.onicecandidate = (event) => {
+                if (event.candidate) return;
+                socket.current.emit(
+                  "offer",
+                  peerConnection.localDescription,
+                  userId
+                );
+              };
+            })
+            .catch((error) => console.error("Error creating offer:", error));
         });
       })
       .catch((error) => console.error("Error accessing media devices:", error));
