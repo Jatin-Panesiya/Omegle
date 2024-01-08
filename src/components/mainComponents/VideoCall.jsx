@@ -34,8 +34,7 @@ const VideoCall = ({ setComponent , userId}) => {
       }]
     }
     if(userId){
-      
-      socket.current = io("https://116.202.174.77/socket.io/", {
+      socket.current = io("https://116.202.174.77/", {
         forceNew: true,
       });
       socket.current.on('connect', () => {
