@@ -28,10 +28,14 @@ const VideoCall = ({ setComponent , userId}) => {
   const establishVideoCall = () =>{
     const  configuration = {
       "iceServers": [{
-          urls: 'turn:192.248.176.141:3478',
+          urls: 'turn:192.248.176.141:443',
           credential: 'turn',
           username: 'turn'
-      }]
+      },{
+        urls: 'turn:116.202.174.77:3478',
+        credential: 'turn',
+        username: 'turn'
+    }]
     }
     if(userId){
       /*
