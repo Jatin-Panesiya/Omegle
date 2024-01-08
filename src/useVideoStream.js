@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export function useVideoStream(videoRef, streamLink) {
+export function useVideoStream(videoRef) {
   useEffect(() => {
     if (!videoRef || !videoRef.current) return;
 

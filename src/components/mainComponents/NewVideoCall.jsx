@@ -2,15 +2,10 @@
 import Image from "next/image";
 import React, { useRef } from "react";
 import { useVideoStream } from "@/useVideoStream";
-import useVideoCallTest from "@/useVideoCallTest";
 
-const NewVideoCall = ({ setComponent }) => {
-  const { localVideoRef, remoteVideoRef } = useVideoCallTest({
-    /*roomId*/
-  });
-
-  const videoRef1 = useRef(null);
-  useVideoStream(videoRef1);
+const NewVideoCall = ({ setComponent, userID }) => {
+  const localVideoRef = useRef(null);
+  useVideoStream(localVideoRef);
 
   return (
     <div className="px-3% sm:px-9% 700:pt-7  pt-9">
