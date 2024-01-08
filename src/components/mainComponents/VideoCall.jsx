@@ -34,9 +34,16 @@ const VideoCall = ({ setComponent , userId}) => {
       }]
     }
     if(userId){
-      socket.current = io("https://116.202.174.77/", {
+      /*
+      socket.current = io("http://localhost:3003/", {
         forceNew: true,
       });
+      */
+      
+      socket.current = io("https://omegle.nu/", {
+        forceNew: true,
+      });
+      
       socket.current.on('connect', () => {
         console.log('connected')
       });
@@ -54,6 +61,9 @@ const VideoCall = ({ setComponent , userId}) => {
           stream
               .getTracks()
               .forEach((track) => {peerConnection.addTrack(track, stream);console.log('Stream added to connection...')});
+          peerConnection.ontrack = (event) => {
+            remoteVideoRef.current.srcObject = event.streams[0];
+          };
           setTimeout(() => {
             socket.current.emit("registerUser", userId);
           }, 1000);
@@ -61,18 +71,11 @@ const VideoCall = ({ setComponent , userId}) => {
             onEndVideoCall();
           });
           socket.current.on("userAccepted", (userId,partnerId) => {
-            peerConnection.ontrack = (event) => {
-              remoteVideoRef.current.srcObject = event.streams[0];
-            };
+            
           });
           
           socket.current.on("userJoined", (userId,partnerId) => {
             if(partnerId){
-              peerConnection.ontrack = (event) => {
-                remoteVideoRef.current.srcObject = event.streams[0];
-              };
-              
-             
               peerConnection
                 .createOffer()
                 .then((createdOffer) =>{
