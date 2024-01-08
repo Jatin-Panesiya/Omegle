@@ -25,7 +25,7 @@ const VideoCall = ({ setComponent , userId}) => {
     }
   }, []);
 
-  const establishVideoCall = async() =>{
+  const establishVideoCall = () =>{
     const  configuration = {
       "iceServers": [{
           urls: 'turn:192.248.176.141:3478',
@@ -34,15 +34,11 @@ const VideoCall = ({ setComponent , userId}) => {
       }]
     }
     if(userId){
-      await fetch('/api/socket')
-      socket.current = io()
-      /*
-      socket.current = io("http://localhost:3003/", {
+      
+      socket.current = io("https://116.202.174.77/", {
         forceNew: true,
       });
-      */
       socket.current.on('connect', () => {
-        alert('connected')
         console.log('connected')
       });
       socket.current.on('disconnect', () => {
