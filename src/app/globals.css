@@ -26,6 +26,7 @@ border: 2px solid var(--3, #FFF);
     grid-template-columns: auto;
     justify-content: center;
   }
+  
 }
 @media (max-width: 340px) {
   .text-responsive {
@@ -41,6 +42,11 @@ border: 2px solid var(--3, #FFF);
 }
 @media (min-width: 900px) {
   .display__responsive {
+    display: none;
+  }
+}
+@media (min-width: 1200px) {
+  .hide-desktop{
     display: none;
   }
 }

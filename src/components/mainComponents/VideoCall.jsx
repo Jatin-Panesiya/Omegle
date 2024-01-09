@@ -15,10 +15,13 @@ const VideoCall = ({ setComponent , userId}) => {
   const [isMicOn, setIsMicOn] = useState(true);
   const [isCamOn, setIsCamOn] = useState(true);
   const [isSound, setIsSound] = useState(true);
+  const [isFrontCam, setIsFrontCam] = useState(false);
+  const [isFacingMode, setIsFacingMode] = useState(false);
   const localVideoRef = useRef(null);
   const remoteVideoRef = useRef(null);
   const streamRef = useRef(null);
   const socket = useRef(null);
+  const peerConnection = useRef(null);
   const  configuration = {
     "iceServers": [{
         urls: 'turn:192.248.176.141:443',
@@ -43,13 +46,17 @@ const VideoCall = ({ setComponent , userId}) => {
   }]
   }
   */
-  let peerConnection = null;
+ 
   useEffect(() => {
     if(socket.current == null){
       establishVideoCall();
+      const supports = navigator.mediaDevices.getSupportedConstraints();
+      if (supports['facingMode']) {
+        setIsFacingMode(true)
+      }
     }
   }, []);
-
+  
   const establishVideoCall = () =>{
       socket.current = io("https://omegle.nu/", {
         forceNew: true,
@@ -64,7 +71,7 @@ const VideoCall = ({ setComponent , userId}) => {
       
       console.log('Initialize peer connection...')
       
-      navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
+      navigator.mediaDevices.getUserMedia({ video: {width:320,height:240}, audio: true }).then((stream) => {
           localVideoRef.current.srcObject = stream;
           streamRef.current = stream;
           if(!window.streams){
@@ -101,8 +108,8 @@ const VideoCall = ({ setComponent , userId}) => {
           });
   
           socket.current.on('icecandidate', (candidate) => {
-            if(peerConnection){
-                peerConnection.addIceCandidate(candidate)
+            if(peerConnection.current){
+                peerConnection.current.addIceCandidate(candidate)
             }     
           });
           
@@ -111,12 +118,12 @@ const VideoCall = ({ setComponent , userId}) => {
     
   }
   const createPeerConnection = async ()=>{
-    peerConnection = new RTCPeerConnection(configuration);
-    streamRef.current.getTracks().forEach((track) => {peerConnection.addTrack(track, streamRef.current);console.log('Stream added to connection...')});
-    peerConnection.ontrack = (event) => {
+    peerConnection.current = new RTCPeerConnection(configuration);
+    streamRef.current.getTracks().forEach((track) => {peerConnection.current.addTrack(track, streamRef.current);console.log('Stream added to connection...')});
+    peerConnection.current.ontrack = (event) => {
       remoteVideoRef.current.srcObject = event.streams[0];
     };
-    peerConnection.onicecandidate = async (event) => {
+    peerConnection.current.onicecandidate = async (event) => {
       if (event.candidate){
         console.log('Sending ice candidate ....')
         socket.current.emit(
@@ -126,22 +133,44 @@ const VideoCall = ({ setComponent , userId}) => {
       }
     }
   }
+  const switchCamera = () =>{
+    setIsFrontCam(!isFrontCam)
+    const facingMode = isFrontCam ? "user":"environment";
+    navigator.mediaDevices.getUserMedia({ video: {width:320,height:240,facingMode:facingMode}}).then((stream) => {
+      window.streams.push(stream)
+      const [videoTrack] = stream.getVideoTracks();
+      if(streamRef.current){
+        streamRef.current.getTracks().forEach((track) => {
+          if(track.kind === videoTrack.kind){
+            track.stop();
+            streamRef.current.removeTrack(track);
+            streamRef.current.addTrack(videoTrack)
+          }
+        });
+      }
+      if(peerConnection.current){
+            const sender = peerConnection.current.getSenders().find((s) => s.track.kind === videoTrack.kind);
+            console.log("Found sender:", sender);
+            sender.replaceTrack(videoTrack);
+      }
+    })
+  }
   const createOffer = async () =>{
     await createPeerConnection();
-    const offer = await peerConnection.createOffer()
-    await peerConnection.setLocalDescription(offer)
+    const offer = await peerConnection.current.createOffer()
+    await peerConnection.current.setLocalDescription(offer)
     socket.current.emit("offer",offer);
   }
   const createAnswer = async (offer) =>{
     await createPeerConnection();
-    await peerConnection.setRemoteDescription(offer)
-    const answer = await peerConnection.createAnswer()
-    await peerConnection.setLocalDescription(answer)
+    await peerConnection.current.setRemoteDescription(offer)
+    const answer = await peerConnection.current.createAnswer()
+    await peerConnection.current.setLocalDescription(answer)
     socket.current.emit("answer",answer);
   }
   const addAnswer = (answer) =>{
-      if(!peerConnection.currentRemoteDescription){
-         peerConnection.setRemoteDescription(answer)
+      if(!peerConnection.current.currentRemoteDescription){
+         peerConnection.current.setRemoteDescription(answer)
       }
   }
   const onEndVideoCall = () =>{
@@ -203,6 +232,9 @@ const VideoCall = ({ setComponent , userId}) => {
               <HiSpeakerXMark className="w-5" />
             )}
           </button>
+          { isFacingMode && (<button onClick={switchCamera} className="bg-[#ff7f00] text-white 700:p-3 p-1.5 rounded-lg 700:rounded-2xl text-2xl hide-desktop">
+            <FaCameraRotate />
+          </button>)}
           <button
             className="bg-[#ff7f00] text-white 700:p-3 p-1.5 rounded-lg 700:rounded-2xl text-2xl"
             onClick={controlCam}
