@@ -21,6 +21,18 @@ const VideoCall = ({ setComponent , userId}) => {
   const socket = useRef(null);
   const  configuration = {
     "iceServers": [{
+        urls: 'turn:192.248.176.141:443',
+        credential: 'turn',
+        username: 'turn'
+    },{
+      urls: 'turn:116.202.174.77:3478',
+      credential: 'turn',
+      username: 'turn'
+  }]
+  }
+  /*
+  const  configuration = {
+    "iceServers": [{
       urls: [ "stun:bn-turn1.xirsys.com" ]}, 
       {username: "1XBCwTVI1hmC0kM1q3Dc2pDJk70liSz58HI1dFhaWLjt-1RqzrvMTTnaxCaOPnNQAAAAAGWc2_ZuaXRoaW5ucGs=",credential: "6551f3be-aeb1-11ee-8101-0242ac140004", 
       urls: ["turn:bn-turn1.xirsys.com:80?transport=udp","turn:bn-turn1.xirsys.com:3478?transport=udp",
@@ -30,6 +42,7 @@ const VideoCall = ({ setComponent , userId}) => {
       "turns:bn-turn1.xirsys.com:5349?transport=tcp"]
   }]
   }
+  */
   let peerConnection = null;
   useEffect(() => {
     if(socket.current == null){
