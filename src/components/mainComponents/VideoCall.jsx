@@ -19,6 +19,18 @@ const VideoCall = ({ setComponent , userId}) => {
   const remoteVideoRef = useRef(null);
   const streamRef = useRef(null);
   const socket = useRef(null);
+  const  configuration = {
+    "iceServers": [{
+      urls: [ "stun:bn-turn1.xirsys.com" ]}, 
+      {username: "1XBCwTVI1hmC0kM1q3Dc2pDJk70liSz58HI1dFhaWLjt-1RqzrvMTTnaxCaOPnNQAAAAAGWc2_ZuaXRoaW5ucGs=",credential: "6551f3be-aeb1-11ee-8101-0242ac140004", 
+      urls: ["turn:bn-turn1.xirsys.com:80?transport=udp","turn:bn-turn1.xirsys.com:3478?transport=udp",
+      "turn:bn-turn1.xirsys.com:80?transport=tcp",
+      "turn:bn-turn1.xirsys.com:3478?transport=tcp",
+      "turns:bn-turn1.xirsys.com:443?transport=tcp",
+      "turns:bn-turn1.xirsys.com:5349?transport=tcp"]
+  }]
+  }
+  let peerConnection = null;
   useEffect(() => {
     if(socket.current == null){
       establishVideoCall();
@@ -26,24 +38,6 @@ const VideoCall = ({ setComponent , userId}) => {
   }, []);
 
   const establishVideoCall = () =>{
-    const  configuration = {
-      "iceServers": [{
-        urls: [ "stun:bn-turn1.xirsys.com" ]}, 
-        {username: "1XBCwTVI1hmC0kM1q3Dc2pDJk70liSz58HI1dFhaWLjt-1RqzrvMTTnaxCaOPnNQAAAAAGWc2_ZuaXRoaW5ucGs=",credential: "6551f3be-aeb1-11ee-8101-0242ac140004", 
-        urls: ["turn:bn-turn1.xirsys.com:80?transport=udp","turn:bn-turn1.xirsys.com:3478?transport=udp",
-        "turn:bn-turn1.xirsys.com:80?transport=tcp",
-        "turn:bn-turn1.xirsys.com:3478?transport=tcp",
-        "turns:bn-turn1.xirsys.com:443?transport=tcp",
-        "turns:bn-turn1.xirsys.com:5349?transport=tcp"]
-    }]
-    }
-    if(userId){
-      /*
-      socket.current = io("http://localhost:3003/", {
-        forceNew: true,
-      });
-      */
-      
       socket.current = io("https://omegle.nu/", {
         forceNew: true,
       });
@@ -54,7 +48,7 @@ const VideoCall = ({ setComponent , userId}) => {
       socket.current.on('disconnect', () => {
         console.log('disconnected')
       });
-      const peerConnection = new RTCPeerConnection(configuration);
+      
       console.log('Initialize peer connection...')
       
       navigator.mediaDevices
@@ -62,94 +56,76 @@ const VideoCall = ({ setComponent , userId}) => {
         .then((stream) => {
           localVideoRef.current.srcObject = stream;
           streamRef.current = stream;
-          stream
-              .getTracks()
-              .forEach((track) => {peerConnection.addTrack(track, stream);console.log('Stream added to connection...')});
-          peerConnection.ontrack = (event) => {
-            remoteVideoRef.current.srcObject = event.streams[0];
-          };
-          setTimeout(() => {
-            socket.current.emit("registerUser", userId);
-          }, 1000);
+
+          socket.current.emit("registerUser", userId);
           socket.current.on("partnerDisconnected", (partnerId) => {
             onEndVideoCall();
           });
           socket.current.on("userAccepted", (userId,partnerId) => {
-            
+              console.log('successfully find new pair...')
           });
           
           socket.current.on("userJoined", (userId,partnerId) => {
             if(partnerId){
-              peerConnection
-                .createOffer()
-                .then((createdOffer) =>{
-                      console.log('created offer')
-                      peerConnection
-                      .setLocalDescription(createdOffer)
-                      .then(()=>{
-                        console.log('Sending offer ....')
-                        socket.current.emit(
-                          "offer",
-                          createdOffer
-                        );
-                        peerConnection.onicecandidate = (event) => {
-                          if (!event.candidate) return;
-                          console.log('Sending ice candidate ....')
-                          socket.current.emit(
-                            "icecandidate",
-                            event.candidate
-                          );
-                        }
-                      }).catch(e=>console.log('[setLocalDescription error]'+e))
-                }).catch(e=>console.log('[createOffer error]'+e))
+               createOffer()
             }
           });
          
           socket.current.on('offer', (offer) => {
-                  console.log('offer received')
-                  peerConnection
-                  .setRemoteDescription(offer)
-                  .then(()=>{
-                      peerConnection
-                      .createAnswer()
-                      .then((createdAnswer)=>{
-                        peerConnection
-                        .setLocalDescription(createdAnswer)
-                        .then(()=>{
-                          console.log('sending answer')
-                          socket.current.emit(
-                            "answer",
-                            createdAnswer
-                          );
-                        }).catch(e=>console.log('[setLocalDescription error]'+e))
-                      }).catch(e=>console.log('[create answer error]'+e))
-                   }).catch(e=>console.log('[setRemoteDescription error]'+e))
-                  
+                console.log('offer received')
+                createAnswer(offer)  
           });
   
           socket.current.on('answer', (answer) => {
-                  console.log('answer receive')
-                  peerConnection
-                  .setRemoteDescription(answer)
-                  .then(()=>{
-                    console.log('seccessfully set remote descritpion for answer')
-                  }).catch(e=>console.log('[setRemoteDescription error for answer]'+e))
+                console.log('answer receive')
+                addAnswer(answer)
                   
           });
   
           socket.current.on('icecandidate', (candidate) => {
-                  peerConnection
-                  .addIceCandidate(candidate)
-                  .then(()=>{
-                      console.log('ICE candidates received')
-                  }).catch(e=>console.log('[icecandidate error for answer]'+e))
+            if(peerConnection){
+                peerConnection.addIceCandidate(candidate)
+            }     
           });
           
         })
         .catch((error) => console.error("Error accessing media devices:", error));
+    
+  }
+  const createPeerConnection = async ()=>{
+    peerConnection = new RTCPeerConnection(configuration);
+    streamRef.current.getTracks().forEach((track) => {peerConnection.addTrack(track, streamRef.current);console.log('Stream added to connection...')});
+    peerConnection.ontrack = (event) => {
+      remoteVideoRef.current.srcObject = event.streams[0];
+    };
+    peerConnection.onicecandidate = async (event) => {
+      if (event.candidate){
+        console.log('Sending ice candidate ....')
+        socket.current.emit(
+          "icecandidate",
+          event.candidate
+        );
+      }
     }
   }
-
+  const createOffer = async () =>{
+    await createPeerConnection();
+    const offer = await peerConnection.createOffer()
+    await peerConnection.setLocalDescription(offer)
+    socket.current.emit("offer",offer);
+  }
+  const createAnswer = async (offer) =>{
+    await createPeerConnection();
+    await peerConnection.setRemoteDescription(offer)
+    const answer = await peerConnection.createAnswer()
+    await peerConnection.setLocalDescription(answer)
+    socket.current.emit("answer",answer);
+  }
+  const addAnswer = (answer) =>{
+      if(!peerConnection.currentRemoteDescription){
+         peerConnection.setRemoteDescription(answer)
+      }
+  }
   const onEndVideoCall = () =>{
     socket.current.disconnect();
     setComponent(2)
