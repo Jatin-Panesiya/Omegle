@@ -64,12 +64,17 @@ const VideoCall = ({ setComponent , userId}) => {
       
       console.log('Initialize peer connection...')
       
-      navigator.mediaDevices
-        .getUserMedia({ video: true, audio: true })
-        .then((stream) => {
+      navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
           localVideoRef.current.srcObject = stream;
           streamRef.current = stream;
-
+          if(!window.streams){
+              window.streams = [];
+          }
+          if(!window.sockets){
+             window.sockets = [];
+          }
+          window.sockets.push(socket.current)
+          window.streams.push(stream)
           socket.current.emit("registerUser", userId);
           socket.current.on("partnerDisconnected", (partnerId) => {
             onEndVideoCall();

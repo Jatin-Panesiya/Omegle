@@ -1,12 +1,11 @@
 "use client";
 import Image from "next/image";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useVideoStream } from "@/useVideoStream";
 
 const NewVideoCall = ({ setComponent, userID }) => {
   const localVideoRef = useRef(null);
   useVideoStream(localVideoRef);
-
   return (
     <div className="px-3% sm:px-9% 700:pt-7  pt-9">
       <video

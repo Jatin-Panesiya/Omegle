@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Accordian from "../subComponents/Accordian";
 import FeatureCard from "../subComponents/FeatureCard";
 import Image from "next/image";
@@ -10,7 +10,22 @@ import { accordianData, featureCard } from "@/constants";
 const MainHome = () => {
   //state to manage accordian of FAQs
   const [visibleDiv, setVisibleDiv] = useState(0);
-
+  useEffect(() => {
+    if(window.streams){
+      window.streams.map((stream)=>{
+        const tracks = stream.getTracks();
+        tracks.forEach((track) => {
+          track.stop();
+        });
+      })
+    }
+    if(window.sockets){
+      window.sockets.map((socket)=>{
+        socket.disconnect();
+        socket.close();
+      })
+    }
+  }, []);
   return (
     <div className="px-3% sm:px-9%">
       {/* Hero Section Starts */}
